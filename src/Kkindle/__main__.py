@@ -1,4 +1,10 @@
-from Kkindle.app import main
+# src/Kkindle/__main__.py
 
-if __name__ == "__main__":
-    main().main_loop()
+from app import BookReaderApp
+
+def main():
+    app = BookReaderApp('Book Reader', 'org.example.bookreader')
+    app.main_loop()
+
+if __name__ == '__main__':
+    main()
