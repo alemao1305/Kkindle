@@ -1,6 +1,4 @@
-"""
-app para melhorar leituras de livros
-"""
+# src/Kkindle/app.py
 
 import toga
 from toga.style import Pack
@@ -8,11 +6,14 @@ from toga.style.pack import COLUMN, ROW
 import fitz  # PyMuPDF para PDFs
 from ebooklib import epub
 import mobi  # Importar a biblioteca mobi
-
+from database import BookDatabase  # Importando a classe do banco de dados
 
 class BookReaderApp(toga.App):
 
     def startup(self):
+        # Inicializar o banco de dados
+        self.db = BookDatabase()
+
         # Criar a janela principal
         main_box = toga.Box(style=Pack(direction=COLUMN, padding=10))
 
@@ -58,6 +59,7 @@ class BookReaderApp(toga.App):
                 page = doc.load_page(page_num)
                 text += page.get_text()
             self.text_area.value = text
+            self.db.add_book('Título PDF', 'Autor PDF', file_path)
         except Exception as e:
             self.main_window.info_dialog('Erro', f'Não foi possível ler o PDF: {str(e)}')
 
@@ -69,20 +71,19 @@ class BookReaderApp(toga.App):
                 if item.get_type() == epub.ITEM_DOCUMENT:
                     text += item.get_content().decode('utf-8')
             self.text_area.value = text
+            self.db.add_book('Título EPUB', 'Autor EPUB', file_path)
         except Exception as e:
             self.main_window.info_dialog('Erro', f'Não foi possível ler o EPUB: {str(e)}')
 
     def read_mobi(self, file_path):
         try:
-            # Extrair o arquivo MOBI para um diretório temporário
             mobi.extract(file_path, "temp_mobi_output")
-            # Ler o arquivo HTML extraído para exibir o texto
             with open("temp_mobi_output/mobi7/book.html", "r", encoding='utf-8') as f:
                 text = f.read()
             self.text_area.value = text
+            self.db.add_book('Título MOBI', 'Autor MOBI', file_path)
         except Exception as e:
             self.main_window.info_dialog('Erro', f'Não foi possível ler o MOBI: {str(e)}')
 
 def main():
     return BookReaderApp('Book Reader', 'org.example.bookreader')
-
