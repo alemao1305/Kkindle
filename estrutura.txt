@@ -1,0 +1,30 @@
+Kkindle/
+|-- backend/
+|   |-- __init__.py
+|   |-- app.py
+|   |-- book_reader.py
+|   |-- database/
+|   |   |-- __init__.py
+|   |   |-- models.py
+|   |   |-- mongodb_config.py
+|   |-- utils/
+|   |   |-- __init__.py
+|   |   |-- mobi_reader.py
+|   |   |-- pdf_reader.py
+|   |   |-- epub_reader.py
+|-- frontend/
+|   |-- kkindle_app/
+|   |   |-- android/
+|   |   |-- ios/
+|   |   |-- lib/
+|   |   |   |-- main.dart
+|   |   |   |-- screens/
+|   |   |   |   |-- home_screen.dart
+|   |   |   |   |-- book_viewer_screen.dart
+|   |   |   |-- widgets/
+|   |   |   |   |-- book_tile.dart
+|   |   |-- test/
+|   |   |-- pubspec.yaml
+|-- README.md
+|-- requirements.txt
+|-- .gitignore
