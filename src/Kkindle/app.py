@@ -5,7 +5,7 @@ from toga.style import Pack
 from toga.style.pack import COLUMN, ROW
 import fitz  # PyMuPDF para PDFs
 from ebooklib import epub
-import mobi  # Importar a biblioteca mobi
+import mobi  # Importar a biblioteca 
 from database import BookDatabase  # Importando a classe do banco de dados
 
 class BookReaderApp(toga.App):
